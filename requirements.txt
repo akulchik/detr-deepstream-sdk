@@ -1,1 +1,9 @@
-timm==0.9.7
+torch>=2.0.1,<3.0.0 --index-url ttps://download.pytorch.org/whl/cu118
+torchvision>=0.15.2,<1.0.0 --index-url ttps://download.pytorch.org/whl/cu118
+torchaudio>=2.0.2,<3.0.0 --index-url ttps://download.pytorch.org/whl/cu118
+transformers>=4.32.1,<5.0.0
+datasets>=2.14.5,<3.0.0
+optimum>=1.13.2,<3.0.0
+timm>=0.9.7,<1.0.0
+onnxruntime[exporters]>=1.16.0,<2.0.0
+onnxruntime-gpu>=1.16.0,<2.0.0
