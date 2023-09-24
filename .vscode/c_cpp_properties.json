@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/opt/nvidia/deepstream/deepstream-6.3/sources/includes",
+                "/usr/local/cuda-12.1/include"
+            ],
+            "defines": [],
+            "compilerPath": "/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++20",
+            "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}
