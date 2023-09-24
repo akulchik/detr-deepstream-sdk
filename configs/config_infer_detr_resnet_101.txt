@@ -1,0 +1,95 @@
+################################################################################
+# Copyright (c) 2018-2023, NVIDIA CORPORATION. All rights reserved.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+# DEALINGS IN THE SOFTWARE.
+################################################################################
+
+# Following properties are mandatory when engine files are not specified:
+#   int8-calib-file(Only in INT8), model-file-format
+#   Caffemodel mandatory properties: model-file, proto-file, output-blob-names
+#   UFF: uff-file, input-dims, uff-input-blob-name, output-blob-names
+#   ONNX: onnx-file
+#
+# Mandatory properties for detectors:
+#   num-detected-classes
+#
+# Optional properties for detectors:
+#   enable-dbscan(Default=false), interval(Primary mode only, Default=0)
+#   custom-lib-path
+#   parse-bbox-func-name
+#
+# Mandatory properties for classifiers:
+#   classifier-threshold, is-classifier
+#
+# Optional properties for classifiers:
+#   classifier-async-mode(Secondary mode only, Default=false)
+#
+# Optional properties in secondary mode:
+#   operate-on-gie-id(Default=0), operate-on-class-ids(Defaults to all classes),
+#   input-object-min-width, input-object-min-height, input-object-max-width,
+#   input-object-max-height
+#
+# Following properties are always recommended:
+#   batch-size(Default=1)
+#
+# Other optional properties:
+#   net-scale-factor(Default=1), network-mode(Default=0 i.e FP32),
+#   model-color-format(Default=0 i.e. RGB) model-engine-file, labelfile-path,
+#   mean-file, gie-unique-id(Default=0), offsets, gie-mode (Default=1 i.e. primary),
+#   custom-lib-path, network-mode(Default=0 i.e FP32)
+#
+# The values in the config file are overridden by values set through GObject
+# properties.
+
+[application]
+enable-perf-measurement=1
+perf-measurement-interval-sec=5
+gie-kitti-output-dir=streamscl
+
+[osd]
+enable=1
+gpu-id=0
+border-width=1
+text-size=10
+text-color=1;1;1;1;
+text-bg-color=0.3;0.3;0.3;1
+font=Serif
+show-clock=0
+clock-x-offset=800
+clock-y-offset=820
+clock-text-size=12
+clock-color=1;0;0;0
+nvbuf-memory-type=0
+
+[property]
+gpu-id=0
+# Specify paths relative to the config's location
+onnx-file=../data/model/onnx/model.onnx
+labelfile-path=../data/detr_resnet_101_labels.txt
+num-detected-classes=91
+# 0=FP32, 1=INT8, 2=FP16
+network-mode=0
+# 0=object-detection, 1=image-classification
+is-classifier=0
+# 0=RGB, 1=BGR
+model-color-format=0
+maintain-aspect-ratio=1
+# Specify path and name for the C++ function that parses model's output
+custom-lib-path=../build/release/libnvdsinfer_custom_detr_resnet_101_bbox.so
+parse-bbox-func-name=NvDsInferParseCustomDETRResNet101
