@@ -4,6 +4,9 @@ DETR_ONNX_DIR=${DETR_DIR}/onnx
 DETR_PT_DIR=${DETR_DIR}/pt
 
 
+.PHONY: all
+all: py-dependencies detr-download detr-pt-to-onnx
+
 .PHONY: git-lfs
 	git lfs install
 
