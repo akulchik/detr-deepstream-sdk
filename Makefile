@@ -1,4 +1,7 @@
 DETR_CHECKPOINT=facebook/detr-resnet-101
+DETR_DIR=data/model
+DETR_ONNX_DIR=${DETR_DIR}/onnx
+DETR_PT_DIR=${DETR_DIR}/pt
 
 
 .PHONY: git-lfs
@@ -14,4 +17,8 @@ py-dependencies: py-venv
 
 .PHONY: detr-download
 detr-download: git-lfs
-	git clone https://huggingface.co/${DETR_CHECKPOINT} data/model
+	git clone https://huggingface.co/${DETR_CHECKPOINT} ${DETR_PT_DIR}
+
+.PHONY: detr-pt-to-onnx
+detr-pt-to-onnx: ${DETR_PT_DIR}/pytorch_model.bin
+	optimum-cli export onnx --model ${DETR_PT_DIR} --task object-detection ${DETR_ONNX_DIR}/
