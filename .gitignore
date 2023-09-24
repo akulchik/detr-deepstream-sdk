@@ -164,3 +164,14 @@ cython_debug/
 # Extra directories
 data/model
 **/tmp
+
+# Image formats
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.gif
+**/*.ico
+**/*.bmp
+**/*.tif
+**/*.tiff
+**/*.svg
