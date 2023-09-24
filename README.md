@@ -19,3 +19,12 @@ versions of Ubuntu, or WSL installation.
 ```bash
 $ make .
 ```
+
+## Known Issues
+
+- Export of PyTorch model to ONNX doesn't pass a validation check of `"logits"` output:
+```
+        - Validating ONNX Model output "logits":
+                -[✓] (2, 100, 92) matches (2, 100, 92)
+                -[x] values not close enough, max diff: 3.695487976074219e-05 (atol: 1e-05)
+```
